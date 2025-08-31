@@ -34,11 +34,7 @@ export async function* parseSSEStream(
             const content = chunk.choices?.[0]?.delta?.content;
             console.log('Content:', content);
             if (content) {
-              // Filter out thinking tags and their content
-              const filteredContent = content.replace(/<think>[\s\S]*?<\/think>/g, '');
-              if (filteredContent) {
-                yield filteredContent;
-              }
+              yield content;
             }
             
             if (chunk.choices?.[0]?.finish_reason) {

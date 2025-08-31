@@ -155,7 +155,12 @@ export function useChat() {
         console.log('Received chunk:', chunk);
         assistantContent += chunk;
         console.log('Assistant content so far:', assistantContent);
-        updateLastMessage(conversationId, assistantContent);
+        
+        // Filter out thinking tags from the complete content
+        const filteredContent = assistantContent.replace(/<think>[\s\S]*?<\/think>/g, '');
+        console.log('Filtered content:', filteredContent);
+        
+        updateLastMessage(conversationId, filteredContent);
       }
 
     } catch (error) {
