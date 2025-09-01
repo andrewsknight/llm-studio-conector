@@ -118,10 +118,10 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
       
       <div
         className={clsx(
-          'max-w-[70%] rounded-2xl px-4 py-3 shadow-sm',
+          'max-w-[70%] rounded-2xl px-4 py-3 shadow-lg',
           isUser
-            ? 'bg-primary-600 text-white ml-auto'
-            : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-700'
+            ? 'bg-gradient-to-r from-primary-600 to-primary-700 text-white ml-auto shadow-primary-500/25'
+            : 'bg-white/90 dark:bg-gray-800/90 text-gray-900 dark:text-gray-100 border border-gray-200/50 dark:border-gray-700/50 backdrop-blur-sm'
         )}
       >
         <div className={clsx(
