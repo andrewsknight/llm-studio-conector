@@ -28,7 +28,8 @@ export function ChatMessage({ message, isStreaming = false }: ChatMessageProps) 
   };
 
   const formatContent = (content: string) => {
-    if (isUser) {
+    if (isUser || isStreaming) {
+      // During streaming or for user messages, show as plain text with line breaks
       return content.split('\n').map((line, index) => (
         <Fragment key={index}>
           {line}

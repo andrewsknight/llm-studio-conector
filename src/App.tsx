@@ -6,7 +6,7 @@ import { ChatInput } from './components/ChatInput';
 import { SettingsDrawer } from './components/SettingsDrawer';
 import { Toolbar } from './components/Toolbar';
 import { EmptyState } from './components/EmptyState';
-import { useChat } from './hooks/useChat';
+import { useChatFixed as useChat } from './hooks/useChat-fixed';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import type { ChatSettings } from './lib/types';
 import { DEFAULT_SETTINGS, STORAGE_KEYS } from './lib/constants';
