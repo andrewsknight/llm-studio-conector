@@ -12,6 +12,8 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 import type { ChatSettings } from './lib/types';
 import { DEFAULT_SETTINGS, STORAGE_KEYS } from './lib/constants';
 
+
+// funcion principal
 function App() {
   const [settings, setSettings] = useLocalStorage<ChatSettings>(
     STORAGE_KEYS.SETTINGS,
