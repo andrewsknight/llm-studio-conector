@@ -259,7 +259,7 @@ export function SettingsDrawer({ isOpen, onClose, settings, onUpdateSettings }: 
 
             <button
               onClick={handleReset}
-              className="w-full py-2 px-4 text-sm text-warning-600 dark:text-warning-400 hover:bg-warning-50 dark:hover:bg-warning-900/10 rounded-lg transition-colors"
+              className="w-full py-2 px-4 text-sm text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/10 rounded-lg transition-colors"
             >
               Restaurar valores por defecto
             </button>

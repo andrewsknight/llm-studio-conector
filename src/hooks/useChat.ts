@@ -21,6 +21,12 @@ export function useChat() {
 
   const currentConversation = conversations.find(c => c.id === currentConversationId);
 
+  console.log('useChat state:', { 
+    conversations, 
+    currentConversationId, 
+    currentConversation 
+  });
+
   const createNewConversation = useCallback(() => {
     const newConversation: Conversation = {
       id: crypto.randomUUID(),
@@ -29,7 +35,12 @@ export function useChat() {
       messages: [],
     };
 
-    setConversations(prev => [newConversation, ...prev]);
+    console.log('createNewConversation: Creating conversation:', newConversation);
+    setConversations(prev => {
+      const updated = [newConversation, ...prev];
+      console.log('createNewConversation: Updated conversations:', updated);
+      return updated;
+    });
     setCurrentConversationId(newConversation.id);
     setError(null);
     
@@ -54,18 +65,22 @@ export function useChat() {
   }, [conversations, currentConversationId, setConversations, setCurrentConversationId]);
 
   const addMessage = useCallback((conversationId: string, message: Message) => {
-    setConversations(prev =>
-      prev.map(conv =>
+    console.log('addMessage called with:', { conversationId, message });
+    setConversations(prev => {
+      const updated = prev.map(conv =>
         conv.id === conversationId
           ? { ...conv, messages: [...conv.messages, { ...message, timestamp: Date.now() }] }
           : conv
-      )
-    );
+      );
+      console.log('Conversations after addMessage:', updated);
+      return updated;
+    });
   }, [setConversations]);
 
   const updateLastMessage = useCallback((conversationId: string, content: string) => {
-    setConversations(prev =>
-      prev.map(conv =>
+    console.log('updateLastMessage called with:', { conversationId, content });
+    setConversations(prev => {
+      const updated = prev.map(conv =>
         conv.id === conversationId
           ? {
               ...conv,
@@ -74,8 +89,10 @@ export function useChat() {
               ),
             }
           : conv
-      )
-    );
+      );
+      console.log('Updated conversations:', updated);
+      return updated;
+    });
   }, [setConversations]);
 
   const sendMessage = useCallback(async (
@@ -87,8 +104,12 @@ export function useChat() {
     let conversationId = currentConversationId;
     
     if (!conversationId) {
+      console.log('No conversationId, creating new conversation');
       const newConv = createNewConversation();
       conversationId = newConv.id;
+      console.log('Created new conversation with ID:', conversationId);
+    } else {
+      console.log('Using existing conversationId:', conversationId);
     }
 
     const userMessage: Message = {
@@ -105,6 +126,7 @@ export function useChat() {
       role: 'assistant',
       content: '',
     };
+    console.log('Adding initial assistant message:', assistantMessage);
     addMessage(conversationId, assistantMessage);
 
     // Actualizar título si es el primer mensaje
@@ -155,7 +177,12 @@ export function useChat() {
         console.log('Received chunk:', chunk);
         assistantContent += chunk;
         console.log('Assistant content so far:', assistantContent);
-        updateLastMessage(conversationId, assistantContent);
+        
+        // Filter out thinking tags from the complete content
+        const filteredContent = assistantContent.replace(/<think>[\s\S]*?<\/think>/g, '');
+        console.log('Filtered content:', filteredContent);
+        
+        updateLastMessage(conversationId, filteredContent);
       }
 
     } catch (error) {

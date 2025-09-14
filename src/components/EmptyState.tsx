@@ -37,10 +37,10 @@ export function EmptyState({ onOpenSettings }: EmptyStateProps) {
           </div>
         </div>
 
-        <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+        <div className="mt-8 p-4 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-700 rounded-xl border border-gray-200/50 dark:border-gray-600/50">
           <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-            <strong>Nota:</strong> Si encuentras problemas de CORS, puedes habilitar el proxy en configuración 
-            o ejecutar LM Studio con la opción <code className="bg-gray-200 dark:bg-gray-700 px-1 rounded">--cors</code>.
+            <strong className="text-gray-800 dark:text-gray-200">Nota:</strong> Si encuentras problemas de CORS, puedes habilitar el proxy en configuración 
+            o ejecutar LM Studio con la opción <code className="bg-gray-200 dark:bg-gray-700 px-2 py-0.5 rounded text-xs font-mono">--cors</code>.
           </p>
         </div>
       </div>

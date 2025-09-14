@@ -6,11 +6,14 @@ import { ChatInput } from './components/ChatInput';
 import { SettingsDrawer } from './components/SettingsDrawer';
 import { Toolbar } from './components/Toolbar';
 import { EmptyState } from './components/EmptyState';
-import { useChat } from './hooks/useChat';
+import { ThinkingSpinner } from './components/ThinkingSpinner';
+import { useChatFixed as useChat } from './hooks/useChat-fixed';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import type { ChatSettings } from './lib/types';
 import { DEFAULT_SETTINGS, STORAGE_KEYS } from './lib/constants';
 
+
+// funcion principal
 function App() {
   const [settings, setSettings] = useLocalStorage<ChatSettings>(
     STORAGE_KEYS.SETTINGS,
@@ -83,8 +86,8 @@ function App() {
 
   return (
     <div className={clsx(
-      'min-h-screen transition-colors duration-200',
-      'bg-gray-50 dark:bg-gray-950'
+      'min-h-screen transition-colors duration-300',
+      'bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900'
     )}>
       {/* Error Toast */}
       {showError && error && (
@@ -102,7 +105,7 @@ function App() {
       )}
 
       {/* Main Layout */}
-      <div className="max-w-4xl mx-auto h-screen flex flex-col">
+      <div className="max-w-4xl mx-auto h-screen flex flex-col backdrop-blur-sm bg-white/60 dark:bg-gray-900/60 shadow-xl">
         <Toolbar
           currentConversation={currentConversation}
           onNewConversation={handleNewConversation}
@@ -134,6 +137,7 @@ function App() {
                     }
                   />
                 ))}
+              <ThinkingSpinner isVisible={isStreaming && currentConversation.messages.length > 0 && currentConversation.messages[currentConversation.messages.length - 1]?.content === ''} />
               <div ref={messagesEndRef} />
             </div>
           )}
