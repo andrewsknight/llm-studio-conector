@@ -52,7 +52,7 @@ export function Toolbar({
   };
 
   return (
-    <div className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 px-6 py-4">
+    <div className="border-b border-gray-200/50 dark:border-gray-700/50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm px-6 py-4">
       <div className="flex items-center justify-between">
         {/* Title Section */}
         <div className="flex items-center space-x-3 flex-1 min-w-0">
@@ -71,7 +71,7 @@ export function Toolbar({
                   />
                   <button
                     onClick={handleSaveTitle}
-                    className="p-1 text-success-600 hover:bg-success-50 dark:hover:bg-success-900/10 rounded transition-colors"
+                    className="p-1 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/10 rounded transition-colors"
                   >
                     <Check className="h-4 w-4" />
                   </button>
